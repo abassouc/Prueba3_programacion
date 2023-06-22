@@ -1,0 +1,112 @@
+import random
+
+listadoVehiculos=[]
+
+
+def grabar():
+    marcaAuto=""
+    patenteAuto=""
+    precioAuto=0
+    #Tipo, patente, marca y precio, multas (monto y fecha), fecha de registro del vehículo y nombre del dueño
+    #debe verificar que la patente sea correcta, la marca considere entre 2 y 15 caracteres y el precio sea mayor a $5.000.000
+    
+    tipoAuto=str(input("Ingrese Tipo de auto : "))
+
+    while len(patenteAuto) < 6 or len(patenteAuto) > 6:
+        patenteAuto=str(input("Ingrese Patente de auto : (Ejemplo = AAXX99) : "))
+        if len(patenteAuto) < 6 or len(patenteAuto) > 6:
+            print("Ingrese patente correcta de 6 caracteres")
+    
+    while len(marcaAuto)<2 or len(marcaAuto)>15:
+        marcaAuto=str(input("Ingrese Marca de auto : "))
+        if len(marcaAuto)<2 or len(marcaAuto)>15:
+            print("Caracteres fuera del rango. Tiene que estar entre 2 y 15 caracteres")
+    
+    while precioAuto<=5000000:
+        precioAuto=int(input("Ingrese Precio del Auto : "))
+        if precioAuto<=5000000:
+            print("El precio del auto ingresado tiene que ser mayor a 5.000.000 : ")
+
+    multaAuto=int(input("Ingrese Cantidad de la MULTA (Si no tiene ingrese 0) : "))
+    fechaMultaAuto=str(input("Ingrese Fecha de la MULTA (Si no tiene ingrese 'No Aplica')\nEjemplo de fecha '01/01/2021' : "))
+    fechaRegistroAuto=str(input("Ingrese Fecha de REGISTRO DEL AUTO \nEjemplo de fecha '01/01/2021' : "))
+    nomDueño=str(input("Ingrese Nombre del Dueño del auto : "))
+
+    listaVehiculo=[tipoAuto,patenteAuto,marcaAuto,precioAuto,multaAuto,fechaMultaAuto,fechaRegistroAuto,nomDueño]
+
+    listadoVehiculos.append(listaVehiculo)
+
+def buscar():
+    buscaPatente=""
+    while len(buscaPatente) < 6 or len(buscaPatente) > 6:
+        buscaPatente=str(input("Ingrese patente a BUSCAR : (Ejemplo = AAXX99) : "))
+    for x in range(len(listadoVehiculos)):
+        if (listadoVehiculos[x][1]) == buscaPatente:
+            print(f"Los datos Ingresados son: \nTipo de Auto : {listadoVehiculos[x][0]}\nPatente Auto : {listadoVehiculos[x][1]}\nMarca Auto : {listadoVehiculos[x][2]}\nPrecio Auto: {listadoVehiculos[x][3]}\nMulta : {listadoVehiculos[x][4]}\nFecha De La Multa : {listadoVehiculos[x][5]}\nFecha Ingreso Del Auto : {listadoVehiculos[x][6]}\nNombre Dueño : {listadoVehiculos[x][7]}")
+        else:
+            print(f"No se ha encontrado un auto con Patente {buscaPatente}")
+
+def imprimirCertificados():
+    buscaPatente=""
+    while len(buscaPatente) < 6 or len(buscaPatente) > 6:
+        buscaPatente=str(input("Ingrese patente a BUSCAR CERTIFICADOS : (Ejemplo = AAXX99) : "))
+    for x in range(len(listadoVehiculos)):
+        if (listadoVehiculos[x][1]) == buscaPatente:
+            print("Certificado de Emision De Contaminantes")
+            print("Valor : ", random.randint(1500,3500))
+            print("Patente : ",listadoVehiculos[x][1])
+            print("Nombre Dueño : ",listadoVehiculos[x][7])
+            print("-------------------------------------------------")
+            print("Certificado de Emision De Anotaciones Vigentes")
+            print("Valor : ", random.randint(1500,3500))
+            print("Patente : ",listadoVehiculos[x][1])
+            print("Nombre Dueño : ",listadoVehiculos[x][7])
+            print("-------------------------------------------------")
+            print("Certificado de Emision De Multas")
+            print("Valor : ", random.randint(1500,3500))
+            print("Patente : ",listadoVehiculos[x][1])
+            print("Nombre Dueño : ",listadoVehiculos[x][7])
+            print("-------------------------------------------------")
+        else:
+            print(f"No se ha encontrado un auto con Patente {buscaPatente}")
+
+
+def salirSistema():
+    print("Usted a salido del Sistema")
+    nomUsuario="Alan Basso"
+    version=1.0
+    print("")
+    print(f"Gracias por Usar el Programa\nAtte. {nomUsuario} - {version}")
+    print("")
+    return breakpoint()
+
+def menu():
+    opcion=0
+    while opcion<1 or opcion>4:
+        print("")
+        print("1)Grabar")
+        print("2)Buscar")
+        print("3)Imprimir Certificados")
+        print("4)Salir")
+        print("")
+        opcion=int(input("Ingrese una opcion : "))
+        print("")
+        if opcion<1 or opcion>4:
+            print("Numero de opcion Incorrecta")
+        if opcion==1:
+            grabar()
+            opcion=0
+        if opcion==2:
+            buscar()
+            opcion=0
+        if opcion==3:
+            imprimirCertificados()
+            opcion=0
+        if opcion==4:
+            salirSistema()
+
+opcionMenu=0
+
+while opcionMenu<2:
+
+    menu()
